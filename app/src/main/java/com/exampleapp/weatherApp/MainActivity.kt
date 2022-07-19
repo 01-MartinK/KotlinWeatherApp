@@ -4,9 +4,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import org.json.JSONObject
 import java.net.URL
 import java.nio.charset.Charset
@@ -15,7 +13,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val CITY: String = "Tartu";
+    public var CITY: String = "Tartu";
     val API: String = "77f97b598769bf8861004c74e30ebbba";
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +21,38 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+
+        var infoBtn = findViewById<LinearLayout>(R.id.infoButton)
+        infoBtn.setOnClickListener {showSettingsPanel()}
+
+        var settingsBackBtn = findViewById<Button>(R.id.settingsBackButton)
+        settingsBackBtn.setOnClickListener {showMainPanel()}
+
+        var changeCityBtn = findViewById<Button>(R.id.changeCityButton)
+        changeCityBtn.setOnClickListener { changeCityHandler() }
+
         weatherTask().execute()
     }
+
+    private fun changeCityHandler() {
+        var changeCityField = findViewById<EditText>(R.id.changeCityField)
+        var newCity = changeCityField.text.toString()
+
+        CITY = newCity
+
+        weatherTask().execute()
+    }
+
+    private fun showSettingsPanel() {
+        findViewById<RelativeLayout>(R.id.settingsContainer).visibility = View.VISIBLE
+        findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.GONE
+    }
+
+    private fun showMainPanel() {
+        findViewById<RelativeLayout>(R.id.settingsContainer).visibility = View.GONE
+        findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.VISIBLE
+    }
+
     inner class  weatherTask() : AsyncTask<String, Void, String>() {
         override fun onPreExecute() {
             super.onPreExecute()
@@ -79,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.humidity).text = humidity
 
                 findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
+                findViewById<RelativeLayout>(R.id.settingsContainer).visibility = View.GONE
                 findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.VISIBLE
             }
             catch (e: Exception) {

@@ -10,6 +10,69 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:id="@+id/settingsContainer"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Settings"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:text="Change City"
+                android:layout_gravity="center"
+                android:textSize="32sp"
+                android:layout_margin="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/changeCityField"
+                android:layout_width="match_parent"
+                android:layout_height="32sp"
+                android:background="@color/white"/>
+
+            <Button
+                android:id="@+id/changeCityButton"
+                android:padding="12dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:text="Change City"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/settingsBackButton"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/mainContainer"
         android:visibility="visible"
         android:layout_width="match_parent"
@@ -263,6 +326,8 @@
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"/>
                 <LinearLayout
+                    android:id="@+id/infoButton"
+                    android:clickable="true"
                     android:orientation="vertical"
                     android:layout_weight="1"
                     android:gravity="center"
